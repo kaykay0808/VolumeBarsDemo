@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Define Custom Attributes -->
+<resources>
+    <declare-styleable name="VolumeView">
+        <attr name="volumeColor" format="color" />
+        <attr name="volumeLevel" format="integer" />
+        <attr name="volumeLines" format="integer" />
+    </declare-styleable>
+</resources>
