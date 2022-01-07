@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Define Custom Attributes -->
+<!-- https://developer.android.com/training/custom-views/create-view -->
 <resources>
     <declare-styleable name="VolumeView">
         <attr name="volumeColor" format="color" />
