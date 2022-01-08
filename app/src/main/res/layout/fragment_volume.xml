@@ -19,7 +19,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Set Volume"
+            android:hint="@string/set_volume"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -35,7 +35,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Set Lines"
+            android:hint="@string/set_lines"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -44,7 +44,7 @@
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="SET VOLUME"
+        android:text="@string/set_volume"
         app:layout_constraintEnd_toEndOf="@+id/setVolumeTextInput"
         app:layout_constraintStart_toStartOf="@+id/setVolumeTextInput"
         app:layout_constraintTop_toBottomOf="@+id/setVolumeTextInput" />
@@ -54,12 +54,13 @@
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="SET LINES"
+        android:text="@string/set_lines"
         app:layout_constraintEnd_toEndOf="@+id/setLinesTextInput"
         app:layout_constraintStart_toStartOf="@+id/setLinesTextInput"
         app:layout_constraintTop_toBottomOf="@+id/setLinesTextInput" />
 
     <com.kay.volumebarsdemo.VolumeView
+        android:id="@+id/volumeView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"

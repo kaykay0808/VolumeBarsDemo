@@ -3,8 +3,10 @@ package com.kay.volumebarsdemo
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.annotation.ColorInt
 
 // https://developer.android.com/training/custom-views/create-view
@@ -14,6 +16,11 @@ class VolumeView(context: Context, attrs: AttributeSet) : LinearLayout(context, 
     private val color: Int
     private var numberOfLines: Int
     private var volumeLevel: Int
+
+    // Dimensions
+    private val sideMargin = resources.getDimensionPixelSize(R.dimen.volume_side_margin)
+    private val betweenMargin = resources.getDimensionPixelSize(R.dimen.volume_between_margin)
+    private val volumeBarHeight = resources.getDimensionPixelSize(R.dimen.volume_height)
 
     // Init the custom view's XML
     init {
@@ -33,20 +40,44 @@ class VolumeView(context: Context, attrs: AttributeSet) : LinearLayout(context, 
             }
         }
         // testing
-        addLines()
+        addChildren()
     }
 
-    // (1) testing?
-    private fun addLines() {
+    // (1) A children layout to the parent linearLayout
+    private fun addChildren() {
         for (i in 1..numberOfLines) {
             addView(createRectangle())
         }
+        // Adding a textview under the volume bars
+        val volumeInfo = TextView(context)
+        volumeInfo.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+        volumeInfo.text = resources.getString(R.string.volume_info, volumeLevel)
+        volumeInfo.gravity = Gravity.CENTER
+        addView(volumeInfo)
     }
 
+    // (2)
     private fun createRectangle(): View {
         val view = View(context)
-        view.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, 20) // <- Height and width in xml
+        view.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, volumeBarHeight)
         view.setBackgroundColor(color)
+        val params = view.layoutParams as MarginLayoutParams
+        params.setMargins(sideMargin, betweenMargin, sideMargin, betweenMargin)
         return view
+    }
+
+    // (3)
+    fun updateNumberOfLines(lines: Int) {
+        numberOfLines = lines
+        removeAllViewsInLayout()
+        addChildren()
+        invalidate()
+    }
+
+    fun updateVolumeLevel(volume: Int) {
+        volumeLevel = volume
+        removeAllViewsInLayout()
+        addChildren()
+        invalidate()
     }
 }
