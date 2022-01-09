@@ -30,6 +30,13 @@ class VolumeFragment : Fragment() {
             val numberOfLines = lineInputString?.toIntOrNull()
             numberOfLines?.let { binding.volumeView.updateNumberOfLines(it) }
         }
+        // Set volume button
+        binding.setVolumeBtn.setOnClickListener {
+            // Set volume textInput
+            val volumeInputString = binding.setVolumeTextInput.editText?.text?.toString()
+            val volumeLevel = volumeInputString?.toIntOrNull()
+            volumeLevel?.let { binding.volumeView.updateVolumeLevel(it) }
+        }
     }
 
     override fun onDestroy() {

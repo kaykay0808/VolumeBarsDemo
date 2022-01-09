@@ -8,12 +8,13 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.ColorInt
+import kotlin.math.roundToInt
 
 // https://developer.android.com/training/custom-views/create-view
 // Custom view -> Creating a View Class
 class VolumeView(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
     @ColorInt
-    private val color: Int
+    private var color: Int
     private var numberOfLines: Int
     private var volumeLevel: Int
 
@@ -39,14 +40,18 @@ class VolumeView(context: Context, attrs: AttributeSet) : LinearLayout(context, 
                 recycle()
             }
         }
-        // testing
         addChildren()
     }
 
     // (1) A children layout to the parent linearLayout
     private fun addChildren() {
-        for (i in 1..numberOfLines) {
-            addView(createRectangle())
+        val firstColorIndex = numberOfLines - (numberOfLines * (volumeLevel/100f)).roundToInt()
+        for (i in 0 until numberOfLines) {
+            if(i < firstColorIndex) {
+                addView(createRectangle(Color.GRAY))
+            } else {
+                addView(createRectangle(color))
+            }
         }
         // Adding a textview under the volume bars
         val volumeInfo = TextView(context)
@@ -57,7 +62,7 @@ class VolumeView(context: Context, attrs: AttributeSet) : LinearLayout(context, 
     }
 
     // (2)
-    private fun createRectangle(): View {
+    private fun createRectangle(@ColorInt color: Int): View {
         val view = View(context)
         view.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, volumeBarHeight)
         view.setBackgroundColor(color)
