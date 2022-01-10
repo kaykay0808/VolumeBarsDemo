@@ -35,7 +35,16 @@ class VolumeFragment : Fragment() {
             // Set volume textInput
             val volumeInputString = binding.setVolumeTextInput.editText?.text?.toString()
             val volumeLevel = volumeInputString?.toIntOrNull()
-            volumeLevel?.let { binding.volumeView.updateVolumeLevel(it) }
+            volumeLevel?.let {
+                // is this a limit?
+                var finalVolume = it
+                if (finalVolume < 0) {
+                    finalVolume = 0
+                } else if (finalVolume > 100) {
+                    finalVolume = 100
+                }
+                binding.volumeView.updateVolumeLevel(it)
+            }
         }
     }
 

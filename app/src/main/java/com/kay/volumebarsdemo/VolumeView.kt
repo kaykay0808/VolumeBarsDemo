@@ -33,7 +33,7 @@ class VolumeView(context: Context, attrs: AttributeSet) : LinearLayout(context, 
 
             try {
                 // Initiate the member variable here
-                color = getColor(R.styleable.VolumeView_volumeColor, Color.CYAN)
+                color = getColor(R.styleable.VolumeView_volumeColor, Color.YELLOW)
                 numberOfLines = getInteger(R.styleable.VolumeView_volumeLines, 10)
                 volumeLevel = getInteger(R.styleable.VolumeView_volumeLines, 10)
             } finally {
@@ -41,13 +41,15 @@ class VolumeView(context: Context, attrs: AttributeSet) : LinearLayout(context, 
             }
         }
         addChildren()
+        // initiate SwipeListener
     }
 
     // (1) A children layout to the parent linearLayout
     private fun addChildren() {
-        val firstColorIndex = numberOfLines - (numberOfLines * (volumeLevel/100f)).roundToInt()
+        val firstColorIndex =
+            numberOfLines - (numberOfLines * (volumeLevel / 100f)).roundToInt()
         for (i in 0 until numberOfLines) {
-            if(i < firstColorIndex) {
+            if (i < firstColorIndex) {
                 addView(createRectangle(Color.GRAY))
             } else {
                 addView(createRectangle(color))
@@ -55,7 +57,8 @@ class VolumeView(context: Context, attrs: AttributeSet) : LinearLayout(context, 
         }
         // Adding a textview under the volume bars
         val volumeInfo = TextView(context)
-        volumeInfo.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+        volumeInfo.layoutParams =
+            LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         volumeInfo.text = resources.getString(R.string.volume_info, volumeLevel)
         volumeInfo.gravity = Gravity.CENTER
         addView(volumeInfo)
@@ -86,3 +89,4 @@ class VolumeView(context: Context, attrs: AttributeSet) : LinearLayout(context, 
         invalidate()
     }
 }
+
