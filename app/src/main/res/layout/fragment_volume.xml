@@ -63,14 +63,15 @@
         android:id="@+id/volumeView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:orientation="vertical"
+        android:background="@color/teal_700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/setVolumeBtn"
         app:volumeColor="@color/yellow"
         app:volumeLevel="10"
-        app:volumeLines="10"/>
+        app:volumeLines="10" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
