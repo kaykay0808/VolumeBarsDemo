@@ -42,6 +42,19 @@ class VolumeView(context: Context, attrs: AttributeSet) : LinearLayout(context, 
         }
         addChildren()
         // initiate SwipeListener
+        setOnTouchListener(object : SwipeListener(context) {
+            override fun scrollVolume(scroll: Float) {
+                // some Math
+                val scrollInt = (scroll/10).roundToInt()
+                var finalVolume = volumeLevel + scrollInt
+                if (finalVolume < 0) {
+                    finalVolume = 0
+                } else if (finalVolume > 100) {
+                    finalVolume = 100
+                }
+                updateVolumeLevel(finalVolume)
+            }
+        })
     }
 
     // (1) A children layout to the parent linearLayout
